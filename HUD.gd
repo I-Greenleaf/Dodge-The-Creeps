@@ -14,7 +14,8 @@ func show_game_over(scores):
 	# Waits until MessageTImer counts to 0
 	await $MessageTimer.timeout
 	
-	show_message(str("High Score:\n", scores[-1], "\n", scores[-2], "\n", scores[-3]))
+	# Displays high scores in current session
+	show_message(str("High Scores:\n", scores[-1], "\n", scores[-2], "\n", scores[-3]))
 	
 	await $MessageTimer.timeout
 	
