@@ -16,7 +16,7 @@ func game_over():
 	$Music.stop()
 	$DeathSound.play()
 	
-	# FIX GIVE A TIMER
+	
 	$HUD.flip_score()
 	
 	
@@ -63,6 +63,9 @@ func _on_mob_timer_timeout():
 	# Choose the velocity for the mob
 	var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
 	mob.linear_velocity = velocity.rotated(direction)
+	
+	# Shortens the timer to increase difficulty as the game goes on
+	$MobTimer.wait_time = 10.0/(score+20)
 	
 	# Add mob to main scene
 	add_child(mob)
