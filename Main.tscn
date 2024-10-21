@@ -7,9 +7,9 @@
 [ext_resource type="AudioStream" uid="uid://d17fm1sodqxky" path="res://art/gameover.wav" id="5_hubcm"]
 [ext_resource type="AudioStream" uid="uid://clqkqhxbfv6ug" path="res://art/House In a Forest Loop.ogg" id="6_maejq"]
 
-[sub_resource type="Curve2D" id="Curve2D_ek2dk"]
+[sub_resource type="Curve2D" id="Curve2D_2eg67"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -240, -450, 0, 0, 0, 0, 240, -450, 0, 0, 0, 0, 240, 270, 0, 0, 0, 0, -240, 270, 0, 0, 0, 0, -240, -450)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 480, 0, 0, 0, 0, 0, 480, 720, 0, 0, 0, 0, 0, 720, 0, 0, 0, 0, 0, 0)
 }
 point_count = 5
 
@@ -28,7 +28,6 @@ color = Color(0.615686, 0.729412, 0.921569, 1)
 [node name="Player" parent="." instance=ExtResource("1_7svsl")]
 
 [node name="MobTimer" type="Timer" parent="."]
-wait_time = 0.5
 
 [node name="ScoreTimer" type="Timer" parent="."]
 
@@ -36,15 +35,16 @@ wait_time = 0.5
 wait_time = 2.0
 one_shot = true
 
+[node name="BulletTimer" type="Timer" parent="."]
+wait_time = 2.0
+
 [node name="StartPosition" type="Marker2D" parent="."]
 position = Vector2(240, 450)
 
 [node name="MobPath" type="Path2D" parent="."]
-position = Vector2(240, 450)
-curve = SubResource("Curve2D_ek2dk")
+curve = SubResource("Curve2D_2eg67")
 
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
-position = Vector2(-240, -450)
 
 [node name="HUD" parent="." instance=ExtResource("4_ivcs0")]
 
@@ -58,4 +58,5 @@ stream = ExtResource("6_maejq")
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="timeout" from="BulletTimer" to="." method="_on_bullet_timer_timeout"]
 [connection signal="start_game" from="HUD" to="." method="new_game"]

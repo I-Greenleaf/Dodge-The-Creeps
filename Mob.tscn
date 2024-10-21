@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://ctmdqm1dry7cr"]
+[gd_scene load_steps=11 format=3 uid="uid://ctmdqm1dry7cr"]
 
 [ext_resource type="Script" path="res://Mob.gd" id="1_4ifht"]
 [ext_resource type="Texture2D" uid="uid://crbs0oraur7cd" path="res://art/enemyFlyingAlt_1.png" id="1_bcen5"]
+[ext_resource type="PackedScene" uid="uid://cfjx21pcn63y4" path="res://Bullet.tscn" id="2_gggf5"]
 [ext_resource type="Texture2D" uid="uid://cc8r6kphsxb51" path="res://art/enemyFlyingAlt_2.png" id="2_rsetu"]
 [ext_resource type="Texture2D" uid="uid://w2a7or4kw6e" path="res://art/enemySwimming_1.png" id="3_52ywu"]
 [ext_resource type="Texture2D" uid="uid://5vva7mddk4a0" path="res://art/enemySwimming_2.png" id="4_vbmtv"]
@@ -52,6 +53,7 @@ height = 84.0
 collision_mask = 0
 gravity_scale = 0.0
 script = ExtResource("1_4ifht")
+bullet_scene = ExtResource("2_gggf5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["mobs"]]
 position = Vector2(-4.76837e-07, 0)
@@ -68,3 +70,7 @@ metadata/_edit_group_ = true
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." groups=["mobs"]]
 metadata/_edit_group_ = true
+
+[node name="PostitionMarker" type="Marker2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

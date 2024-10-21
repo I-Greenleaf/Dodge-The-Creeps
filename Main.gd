@@ -1,12 +1,14 @@
 extends Node
 
 @export var mob_scene: PackedScene
+
 var score
 var high_scores = [0, 0, 0]
 
 func game_over():
 	$ScoreTimer.stop()
 	$MobTimer.stop()
+	$BulletTimer.stop()
 	
 	high_scores.push_front(score)
 	high_scores.sort()
@@ -16,16 +18,15 @@ func game_over():
 	$Music.stop()
 	$DeathSound.play()
 	
-	
 	$HUD.flip_score()
 	
-	
-	
-	
+
+
 func new_game():
 	score = 0
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
+	$BulletTimer.start()
 	$HUD.flip_score()
 	
 	$HUD.update_score(score)
@@ -49,24 +50,24 @@ func _on_mob_timer_timeout():
 	mob_spawn_location.progress_ratio = randf()
 	
 	
-	var direction = mob_spawn_location.rotation #+ PI / 2
+	var direction = mob_spawn_location.rotation + PI / 2
 	# + PI / 2 to set the mob's direction perpendicular to the path direction
 	
 	# Set the mob's position to a random location
 	mob.position = mob_spawn_location.position
-	
 	# Add some randomness to the direction
 	direction += randf_range(-PI/4, PI/4)
 	
 	mob.rotation = direction
 	
 	# Choose the velocity for the mob
-	var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
+	var velocity = Vector2(randf_range(100.0, 250.0), 0.0)
 	mob.linear_velocity = velocity.rotated(direction)
 	
 	# Shortens the timer to increase difficulty as the game goes on
-	$MobTimer.wait_time = 10.0/(score+20)
-	
+	# Timer starts at 1 sec gets to
+	$MobTimer.wait_time = 30.0/(score+30)
+
 	# Add mob to main scene
 	add_child(mob)
 
@@ -74,4 +75,8 @@ func _on_mob_timer_timeout():
 func _on_score_timer_timeout():
 	score += 1
 	$HUD.update_score(score)
+	
+
+func _on_bullet_timer_timeout():
+	get_tree().call_group("mobs", "shoot")
 	
