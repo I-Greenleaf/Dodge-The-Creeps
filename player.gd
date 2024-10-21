@@ -62,11 +62,16 @@ func _process(delta):
 	# Left/Right Rotation
 	elif velocity.x != 0:
 		$AnimatedSprite2D.animation = "walk"
-		$AnimatedSprite2D.rotation = PI/2 if velocity.x > 0 else 3*PI/2
+		if velocity.x > 0:
+			$AnimatedSprite2D.rotation = PI/2
+			$AnimatedSprite2D.flip_h = true
+		else:
+			$AnimatedSprite2D.rotation = 3*PI/2
+			$AnimatedSprite2D.flip_h = false
 	
 
 
-func _on_body_entered(body):
+func _on_body_entered(_body):
 	hide() # Player disapears after being hit
 	hit.emit()
 	# Must be deferred as we can't change physics properties on a physics callback.
