@@ -17,8 +17,7 @@ func shoot():
 	if type == "swim":
 		# Creates a new bullet
 		var bullet = bullet_scene.instantiate()
-		# Sets the bullet's starting postion as the mob's potion
-		bullet.position = $PostitionMarker.position
+		# Postion and Rotation already match the mob's; no need to set them
 
 		# Bullet travels at double the mob's speed
 		var velocity = linear_velocity * 2
