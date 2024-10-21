@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c4pwlhikkklin"]
+[gd_scene load_steps=5 format=3 uid="uid://c4pwlhikkklin"]
 
 [ext_resource type="Script" path="res://HUD.gd" id="1_4uaog"]
 [ext_resource type="FontFile" uid="uid://ba8mq0xrl1whb" path="res://fonts/Xolonium-Regular.ttf" id="1_bx7lo"]
@@ -8,20 +8,6 @@ action = &"start_game"
 
 [sub_resource type="Shortcut" id="Shortcut_abmnt"]
 events = [SubResource("InputEventAction_8pcdd")]
-
-[sub_resource type="GDScript" id="GDScript_b4q4k"]
-script/source = "extends Timer
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-"
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_4uaog")
@@ -78,7 +64,6 @@ text = "Start"
 [node name="MessageTimer" type="Timer" parent="."]
 wait_time = 1.5
 one_shot = true
-script = SubResource("GDScript_b4q4k")
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
